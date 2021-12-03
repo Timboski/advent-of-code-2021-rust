@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
-use std::str::FromStr;
 use std::fmt::Debug;
+use std::str::FromStr;
 
 fn main() {
     println!("Sonar Sweep");
@@ -10,11 +10,10 @@ fn main() {
     println!("Puzzle 1");
     let res1 = sweep(&file_contents);
 
-    
-    println!("Puzzle 1");
+    println!("Puzzle 2");
     let filtered = sliding_window(&file_contents);
     let res2 = sweep(&filtered);
-    
+
     println!("Puzzle 1 Answer: {}", res1);
     println!("Puzzle 2 Answer: {}", res2)
 }
@@ -34,7 +33,7 @@ pub fn sweep(v: &[i32]) -> i32 {
             }
             Ordering::Equal => println!(" => No Change!"),
         }
-        
+
         current_depth = *depth;
     }
     count
@@ -42,14 +41,18 @@ pub fn sweep(v: &[i32]) -> i32 {
 
 fn sliding_window(v: &[i32]) -> Vec<i32> {
     let size = v.len();
-    v[0..(size -2)].iter()
+    v[0..(size - 2)]
+        .iter()
         .zip(v[1..(size - 1)].iter())
         .zip(v[2..size].iter())
-        .map(|((a,b),c)| a + b + c)
+        .map(|((a, b), c)| a + b + c)
         .collect()
 }
 
-fn read_all<T: FromStr>(file_name: &str) -> Vec<T> where <T as FromStr>::Err: Debug {
+fn read_all<T: FromStr>(file_name: &str) -> Vec<T>
+where
+    <T as FromStr>::Err: Debug,
+{
     std::fs::read_to_string(file_name)
         .expect("file not found!")
         .lines()
@@ -79,8 +82,15 @@ fn test_sliding_window_example() {
     let filtered = sliding_window(&v);
 
     // Assert
-    assert_eq!(filtered.len(), expected.len(), "Arrays don't have the same length");
-    assert!(filtered.iter().zip(expected.iter()).all(|(a,b)| a == b), "Arrays are not equal");
+    assert_eq!(
+        filtered.len(),
+        expected.len(),
+        "Arrays don't have the same length"
+    );
+    assert!(
+        filtered.iter().zip(expected.iter()).all(|(a, b)| a == b),
+        "Arrays are not equal"
+    );
 }
 
 #[test]
@@ -93,8 +103,18 @@ fn test_example_file() {
     let file_contents = read_all::<i32>(example_path);
 
     // Assert
-    assert_eq!(file_contents.len(), expected.len(), "Arrays don't have the same length");
-    assert!(file_contents.iter().zip(expected.iter()).all(|(a,b)| a == b), "Arrays are not equal");
+    assert_eq!(
+        file_contents.len(),
+        expected.len(),
+        "Arrays don't have the same length"
+    );
+    assert!(
+        file_contents
+            .iter()
+            .zip(expected.iter())
+            .all(|(a, b)| a == b),
+        "Arrays are not equal"
+    );
 }
 
 #[test]
