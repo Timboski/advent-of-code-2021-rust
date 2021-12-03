@@ -4,11 +4,19 @@ use std::fmt::Debug;
 
 fn main() {
     println!("Sonar Sweep");
-    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
     let file_contents = read_all::<i32>(example_path);
+
+    println!("Puzzle 1");
+    let res1 = sweep(&file_contents);
+
+    
+    println!("Puzzle 1");
     let filtered = sliding_window(&file_contents);
-    let res = sweep(&filtered);
-    println!("Answer: {}", res)
+    let res2 = sweep(&filtered);
+    
+    println!("Puzzle 1 Answer: {}", res1);
+    println!("Puzzle 2 Answer: {}", res2)
 }
 
 pub fn sweep(v: &[i32]) -> i32 {
@@ -92,7 +100,7 @@ fn test_example_file() {
 #[test]
 fn puzzle1_regression() {
     // Arrange
-    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
     let file_contents = read_all::<i32>(example_path);
 
     // Act
@@ -105,7 +113,7 @@ fn puzzle1_regression() {
 #[test]
 fn puzzle2_regression() {
     // Arrange
-    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
     let file_contents = read_all::<i32>(example_path);
 
     // Act
