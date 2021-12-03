@@ -87,3 +87,16 @@ fn test_example_file() {
     assert_eq!(file_contents.len(), expected.len(), "Arrays don't have the same length");
     assert!(file_contents.iter().zip(expected.iter()).all(|(a,b)| a == b), "Arrays are not equal");
 }
+
+#[test]
+fn puzzle1_regression() {
+    // Arrange
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
+    let file_contents = read_all::<i32>(example_path);
+
+    // Act
+    let res = sweep(&file_contents);
+
+    // Assert
+    assert_eq!(res, 1532);
+}
