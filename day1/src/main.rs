@@ -6,14 +6,11 @@ fn main() {
     let path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
     let file_contents = read_all::<i32>(path);
 
-    println!("Puzzle 1");
     let res1 = sweep(&file_contents);
+    println!("Puzzle 1 Answer: {}", res1);
 
-    println!("Puzzle 2");
     let filtered = sliding_window(&file_contents);
     let res2 = sweep(&filtered);
-
-    println!("Puzzle 1 Answer: {}", res1);
     println!("Puzzle 2 Answer: {}", res2)
 }
 
