@@ -4,8 +4,8 @@ use std::fmt::Debug;
 
 fn main() {
     println!("Sonar Sweep");
-    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
-    let file_contents = read_all::<i32>(example_path);
+    let path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle_input";
+    let file_contents = read_all::<i32>(path);
 
     println!("Puzzle 1");
     let res1 = sweep(&file_contents);
