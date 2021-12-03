@@ -2,6 +2,13 @@ use std::process::abort;
 
 fn main() {
     println!("Dive!");
+
+    let path = "/workspaces/advent-of-code-2021-rust/day2/src/test_example";
+    let file = std::fs::read_to_string(path).expect("file not found!");
+    let lines: Vec<&str> = file.lines().collect();
+
+    let res = plot_course(&lines);
+    println!("Example result: {}", res)
 }
 
 fn plot_course(course: &[&str]) -> i32 {
