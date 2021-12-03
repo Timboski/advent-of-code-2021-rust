@@ -45,3 +45,17 @@ fn test_example_route() {
     // Assert
     assert_eq!(res, 150);
 }
+
+#[test]
+fn test_example_route_from_file() {
+    // Arrange
+    let path = "/workspaces/advent-of-code-2021-rust/day2/src/test_example";
+    let file = std::fs::read_to_string(path).expect("file not found!");
+    let lines: Vec<&str> = file.lines().collect();
+
+    // Act
+    let res = plot_course(&lines);
+
+    // Assert
+    assert_eq!(res, 150);
+}
