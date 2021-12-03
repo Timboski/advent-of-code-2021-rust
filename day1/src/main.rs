@@ -50,8 +50,13 @@ fn read_all<T: FromStr>(file_name: &str) -> Vec<T> where <T as FromStr>::Err: De
 
 #[test]
 fn test_example_sweep() {
+    // Arrange
     let v = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
+
+    // Act
     let res = sweep(&v);
+
+    // Assert
     assert_eq!(res, 7);
 }
 
