@@ -31,6 +31,15 @@ pub fn sweep(v: &[i32]) -> i32 {
     count
 }
 
+fn sliding_window(v: &[i32]) -> Vec<i32> {
+    let size = v.len();
+    v[0..(size -2)].iter()
+        .zip(v[1..(size - 1)].iter())
+        .zip(v[2..size].iter())
+        .map(|((a,b),c)| a + b + c)
+        .collect()
+}
+
 fn read_all<T: FromStr>(file_name: &str) -> Vec<T> where <T as FromStr>::Err: Debug {
     std::fs::read_to_string(file_name)
         .expect("file not found!")
@@ -44,6 +53,20 @@ fn test_example_sweep() {
     let v = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
     let res = sweep(&v);
     assert_eq!(res, 7);
+}
+
+#[test]
+fn test_sliding_window_example() {
+    // Arrange
+    let v = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
+    let expected = vec![607, 618, 618, 617, 647, 716, 769, 792];
+
+    // Act
+    let filtered = sliding_window(&v);
+
+    // Assert
+    assert_eq!(filtered.len(), expected.len(), "Arrays don't have the same length");
+    assert!(filtered.iter().zip(expected.iter()).all(|(a,b)| a == b), "Arrays are not equal");
 }
 
 #[test]
