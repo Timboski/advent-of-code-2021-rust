@@ -1,4 +1,3 @@
-use std::cmp::Ordering;
 use std::fmt::Debug;
 use std::str::FromStr;
 
@@ -19,24 +18,12 @@ fn main() {
 }
 
 pub fn sweep(v: &[i32]) -> i32 {
-    let mut count: i32 = 0;
-    let mut current_depth: i32 = v[0];
-
-    for depth in v {
-        print!("{}", depth);
-
-        match depth.cmp(&current_depth) {
-            Ordering::Less => println!(" => Smaller!"),
-            Ordering::Greater => {
-                println!(" => Bigger!");
-                count += 1;
-            }
-            Ordering::Equal => println!(" => No Change!"),
-        }
-
-        current_depth = *depth;
-    }
-    count
+    let size = v.len();
+    v[0..(size - 1)]
+        .iter()
+        .zip(v[1..size].iter())
+        .filter(|(a, b)| a < b)
+        .count() as i32
 }
 
 fn sliding_window(v: &[i32]) -> Vec<i32> {
