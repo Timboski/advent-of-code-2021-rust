@@ -101,3 +101,17 @@ fn puzzle1_regression() {
     // Assert
     assert_eq!(res, 1532);
 }
+
+#[test]
+fn puzzle2_regression() {
+    // Arrange
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
+    let file_contents = read_all::<i32>(example_path);
+
+    // Act
+    let filtered = sliding_window(&file_contents);
+    let res = sweep(&filtered);
+
+    // Assert
+    assert_eq!(res, 1571);
+}
