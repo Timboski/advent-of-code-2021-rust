@@ -50,7 +50,7 @@ fn test_example_sweep() {
 fn test_example_file() {
     // Arrange
     let expected = vec![199, 200, 208, 210, 200, 207, 240, 269, 260, 263];
-    let example_path = "/workspaces/rusttest/day1/src/test_example";
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/test_example";
 
     // Act
     let file_contents = read_all::<i32>(example_path);
