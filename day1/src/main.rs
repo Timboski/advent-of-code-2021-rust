@@ -4,7 +4,7 @@ use std::fmt::Debug;
 
 fn main() {
     println!("Sonar Sweep");
-    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/test_example";
+    let example_path = "/workspaces/advent-of-code-2021-rust/day1/src/puzzle1_input";
     let file_contents = read_all::<i32>(example_path);
     let res = sweep(&file_contents);
     println!("Answer: {}", res)
