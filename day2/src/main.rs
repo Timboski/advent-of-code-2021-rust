@@ -110,3 +110,17 @@ fn puzzle1_regression() {
     // Assert
     assert_eq!(res, 1813801);
 }
+
+#[test]
+fn puzzle2_regression() {
+    // Arrange
+    let path = "/workspaces/advent-of-code-2021-rust/day2/src/puzzle_input";
+    let file = std::fs::read_to_string(path).expect("file not found!");
+    let lines: Vec<&str> = file.lines().collect();
+
+    // Act
+    let res = plot_course_scheme2(&lines);
+
+    // Assert
+    assert_eq!(res, 1960569556);
+}
