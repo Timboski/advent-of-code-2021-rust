@@ -3,7 +3,7 @@ use std::process::abort;
 fn main() {
     println!("Dive!");
 
-    let path = "/workspaces/advent-of-code-2021-rust/day2/src/test_example";
+    let path = "/workspaces/advent-of-code-2021-rust/day2/src/puzzle_input";
     let file = std::fs::read_to_string(path).expect("file not found!");
     let lines: Vec<&str> = file.lines().collect();
 
