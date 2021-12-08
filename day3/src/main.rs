@@ -8,13 +8,8 @@ fn decode_diagnostic(diagnostic: &[&str]) -> u32 {
     let mut total: u32 = 0;
     let num_bits = diagnostic[0].len();
     for i in 0..num_bits {
-        match get_bit(i, diagnostic) {
-            true => {
-                let bit_value = 1 << (num_bits - i - 1);
-                println!("Bit {} = {}", i, bit_value);
-                total += bit_value
-            }
-            false => {}
+        if get_bit(i, diagnostic) {
+            total += 1 << (num_bits - i - 1)
         };
     }
 
