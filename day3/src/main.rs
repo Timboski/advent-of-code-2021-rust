@@ -29,19 +29,54 @@ fn decode_power_consumption(diagnostic: &[&str]) -> u32 {
 }
 
 fn decode_life_support_rating(diagnostic: &[&str]) -> u32 {
-    0
+    let oxygen_generator_rating = find_match(diagnostic, true);
+    let co2_scrubber_rating = find_match(diagnostic, false);
+    oxygen_generator_rating * co2_scrubber_rating
+}
+
+fn find_match(diagnostic: &[&str], criteria: bool) -> u32 {
+    let num_bits = diagnostic[0].len();
+    let mut filtered: Vec<&str> = diagnostic.to_vec();
+    for i in 0..num_bits {
+        let filter = get_bit_match(i, criteria, &filtered);
+        filtered = filtered
+            .iter()
+            .filter(|a| a.chars().nth(i).unwrap() == filter)
+            .cloned()
+            .collect();
+        println!("Filter bit {} on {} List: {:?}", i, filter, filtered);
+
+        if filtered.len() == 1 {
+            println!("Found {:?}", filtered);
+            return 0;
+        };
+    }
+    abort();
 }
 
 fn get_bit(i: usize, diagnostic: &[&str]) -> bool {
-    let sum: i32 = diagnostic
+    bit_weighting(i, diagnostic) > 0
+}
+
+fn get_bit_match(i: usize, criteria: bool, diagnostic: &[&str]) -> char {
+    let weight = bit_weighting(i, diagnostic);
+    let one = if criteria { weight >= 0 } else { weight < 0 };
+    if one {
+        '1'
+    } else {
+        '0'
+    }
+}
+
+fn bit_weighting(i: usize, diagnostic: &[&str]) -> i32 {
+    diagnostic
         .iter()
         .map(|a| match a.chars().nth(i).unwrap() {
             '0' => -1,
             '1' => 1,
             _ => abort(),
         })
-        .sum();
-    sum > 0
+        .sum()
 }
 
 #[test]
