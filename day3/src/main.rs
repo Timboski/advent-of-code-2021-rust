@@ -44,10 +44,8 @@ fn find_match(diagnostic: &[&str], criteria: bool) -> u32 {
             .filter(|a| a.chars().nth(i).unwrap() == filter)
             .cloned()
             .collect();
-        println!("Filter bit {} on {} List: {:?}", i, filter, filtered);
 
         if filtered.len() == 1 {
-            println!("Found {:?}", filtered);
             return u32::from_str_radix(filtered[0], 2).unwrap();
         };
     }
