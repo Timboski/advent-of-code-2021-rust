@@ -48,7 +48,7 @@ fn find_match(diagnostic: &[&str], criteria: bool) -> u32 {
 
         if filtered.len() == 1 {
             println!("Found {:?}", filtered);
-            return 0;
+            return u32::from_str_radix(filtered[0], 2).unwrap();
         };
     }
     abort();
