@@ -2,6 +2,13 @@ use std::process::abort;
 
 fn main() {
     println!("Binary Diagnostic");
+
+    let path = "/workspaces/advent-of-code-2021-rust/day3/src/puzzle_input";
+    let file = std::fs::read_to_string(path).expect("file not found!");
+    let lines: Vec<&str> = file.lines().collect();
+
+    let res1 = decode_diagnostic(&lines);
+    println!("Puzzle 1 result: {}", res1);
 }
 
 fn decode_diagnostic(diagnostic: &[&str]) -> u32 {
