@@ -5,7 +5,7 @@ fn main() {
     let file = std::fs::read_to_string(path).expect("file not found!");
     let mut lines = file.lines();
 
-    let calls: Vec<i32> = decode_line(lines.next().unwrap(), ',');
+    let calls: Vec<i32> = lines.next().unwrap().decode_line(',');
     println!("Calls: {:?}", calls);
 
     while let Some(blank) = lines.next() {
@@ -13,15 +13,21 @@ fn main() {
         println!();
         println!("Board:");
         for _ in 0..5 {
-            let board_row = decode_line(lines.next().unwrap(), ' ');
+            let board_row = lines.next().unwrap().decode_line(' ');
             println!("{:?}", board_row);
         }
     }
 }
 
-fn decode_line(line: &str, delimeter: char) -> Vec<i32> {
-    line.split(delimeter)
-        .filter(|s| !s.is_empty())
-        .map(|s| s.parse().unwrap())
-        .collect()
+pub trait DecodeLine {
+    fn decode_line(&self, delimeter: char) -> Vec<i32>;
+}
+
+impl DecodeLine for &str {
+    fn decode_line(&self, delimeter: char) -> Vec<i32> {
+        self.split(delimeter)
+            .filter(|s| !s.is_empty())
+            .map(|s| s.parse().unwrap())
+            .collect()
+    }
 }
