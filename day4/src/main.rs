@@ -1,3 +1,5 @@
+use std::str::Lines;
+
 fn main() {
     println!("Giant Squid");
 
@@ -12,10 +14,8 @@ fn main() {
         assert!(blank.is_empty());
         println!();
         println!("Board:");
-        for _ in 0..5 {
-            let board_row = lines.next().unwrap().decode_line(' ');
-            println!("{:?}", board_row);
-        }
+        let board = BingoBoard::new(&mut lines);
+        board.print();
     }
 }
 
@@ -29,5 +29,24 @@ impl DecodeLine for &str {
             .filter(|s| !s.is_empty())
             .map(|s| s.parse().unwrap())
             .collect()
+    }
+}
+
+struct BingoBoard {
+    rows: Vec<Vec<i32>>,
+}
+
+impl BingoBoard {
+    fn new(lines: &mut Lines) -> Self {
+        let rows = (0..5)
+            .map(|_| lines.next().unwrap().decode_line(' '))
+            .collect();
+        Self { rows }
+    }
+
+    fn print(&self) {
+        for row in &self.rows {
+            println!("{:?}", row);
+        }
     }
 }
